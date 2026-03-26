@@ -36,4 +36,19 @@ class PostmanEchoTest {
                 .statusCode(200)
                 .body("data", equalTo(testData));
     }
+
+    @Test
+    void shouldFailTest() {
+        String testData = "Test data";
+
+        given()
+                .baseUri("https://postman-echo.com")
+                .contentType("text/plain; charset=UTF-8")
+                .body(testData)
+                .when()
+                .post("/post")
+                .then()
+                .statusCode(200)
+                .body("wrong.field", equalTo(testData));
+    }
 }
